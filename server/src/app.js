@@ -1,15 +1,17 @@
-console.log("hello");
-
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors());
 
-//route '/status'
-app.get("/status", (req, res) => {
+// @route   POST /register
+// @desc    register using credentials
+// @access  Public
+app.post("/register", (req, res) => {
   res.send({
-    message: "Im working"
+    message: `Hello ${req.body.email}.`
   });
 });
 
