@@ -6,7 +6,6 @@ const AuthenticationController = require("../controllers/AuthenticationControlle
 // @route   POST /register
 // @desc    register using credentials
 // @access  Public
-
 router.post(
   //path
   "/register",
@@ -14,6 +13,16 @@ router.post(
   AuthenticationControllerPolicy.register,
   //If there is no error
   AuthenticationController.register
+);
+
+// @route   POST /register
+// @desc    register using credentials
+// @access  Public
+router.post(
+  //path
+  "/login",
+  //If there is no error
+  AuthenticationController.login
 );
 
 module.exports = router;

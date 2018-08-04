@@ -1,17 +1,16 @@
 <template>
-  <v-container grid-list-md>
-      <v-flex md6 xs12 class="register" elevation-4>
+    <v-container grid-list-md>
+      <v-flex md6 xs12 class="login" elevation-4>
 
           <v-toolbar color="blue">
             <v-toolbar-title>
-              Register
+              Login
             </v-toolbar-title>
             
           </v-toolbar >
 
         <v-fade-transition>
           <v-alert error :value="true" v-if="error != null">{{error}}</v-alert>
-          <v-alert success :value="true" v-if="message != null">{{error}}</v-alert>
         </v-fade-transition>
         <v-form ref="form" lazy-validation class="form">
           <v-text-field
@@ -26,7 +25,7 @@
             type="password"
             required>
           </v-text-field>
-          <v-btn outline color="blue" @click="register">Register</v-btn>
+          <v-btn outline color="blue" @click="login">Login</v-btn>
         </v-form>
       </v-flex>
 
@@ -41,20 +40,18 @@ export default {
     return {
       email: "",
       password: "",
-      error: null,
-      message: null
+      error: null
     };
   },
   methods: {
-    async register() {
+    async login() {
       try {
-        const response = await AuthenticationService.register({
+        const response = await AuthenticationService.login({
           email: this.email,
           password: this.password
         });
         this.$store.dispatch("setToken", response.data.token);
         this.$store.dispatch("setUser", response.data.user);
-        this.message = response.data.message;
       } catch (error) {
         //if there is an error, this is response from backend
         this.error = error.response.data.error;
@@ -64,8 +61,9 @@ export default {
 };
 </script>
 
+
 <style lang="scss" scoped>
-.register {
+.login {
   margin: 0 auto;
 }
 .form {
