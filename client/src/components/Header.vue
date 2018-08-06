@@ -12,7 +12,7 @@
         <router-link to="/">
           <v-list-tile >
             <v-list-tile-action>
-              <v-icon>dashboard</v-icon>
+              <v-icon>fas fa-chart-area</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title>Home</v-list-tile-title>
@@ -25,7 +25,7 @@
 
     <v-toolbar app fixed clipped-left>
         <v-toolbar-side-icon @click.stop="drawer = !drawer">
-          <v-icon>menu</v-icon>
+          <v-icon>fas fa-bars</v-icon>
         </v-toolbar-side-icon>
 
         <router-link to="/">
@@ -44,9 +44,11 @@
             <v-btn flat class="btn-link">Login</v-btn>
           </router-link>
 
-          <router-link to="/" v-if="$store.state.isUserLoggedIn">
-            <v-btn flat class="btn-link" disabled>Logout</v-btn>
-          </router-link>
+          <v-btn 
+          flat 
+          class="btn-link" 
+          v-if="$store.state.isUserLoggedIn"
+          @click="logout"> Logout </v-btn>
 
         </v-toolbar-items>
 
@@ -60,7 +62,14 @@ export default {
     drawer: false
   }),
 
-  name: "Header"
+  name: "Header",
+  methods: {
+    logout() {
+      this.$store.dispatch("setToken", null);
+      this.$store.dispatch("setUser", null);
+      this.$router.push({ name: "home" });
+    }
+  }
 };
 </script>
 

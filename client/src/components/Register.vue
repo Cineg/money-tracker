@@ -1,19 +1,10 @@
 <template>
   <v-container grid-list-md>
-      <v-flex md6 xs12 class="register" elevation-4>
-
-          <v-toolbar color="blue">
-            <v-toolbar-title>
-              Register
-            </v-toolbar-title>
-            
-          </v-toolbar >
-
-        <v-fade-transition>
+      <FormTemplate title="Register">
+        <div slot="alert"> 
           <v-alert error :value="true" v-if="error != null">{{error}}</v-alert>
-          <v-alert success :value="true" v-if="message != null">{{error}}</v-alert>
-        </v-fade-transition>
-        <v-form ref="form" lazy-validation class="form">
+        </div>
+        <div slot="form">
           <v-text-field
             v-model="email"
             label="E-mail"
@@ -27,16 +18,19 @@
             required>
           </v-text-field>
           <v-btn outline color="blue" @click="register">Register</v-btn>
-        </v-form>
-      </v-flex>
-
+        </div>
+      </FormTemplate>
   </v-container>
 </template>
 
 <script>
 import AuthenticationService from "@/services/AuthenticationService";
+import FormTemplate from "./templates/InputForm";
 
 export default {
+  components: {
+    FormTemplate
+  },
   data() {
     return {
       email: "",

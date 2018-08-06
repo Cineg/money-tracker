@@ -2,16 +2,9 @@
   <v-app id="app" dark>
 
     <Header />
-
-      <v-content>
-        <v-container fluid>
-          <v-layout>
-            <router-view/>
-          </v-layout>
-        </v-container>
+      <v-content justify-center>
+          <router-view/>      
       </v-content>
-
-
   </v-app>
 </template>
 
